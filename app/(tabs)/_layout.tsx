@@ -43,18 +43,36 @@ const TabLayout = () => {
         },
       }}
     >
-      {tabs.map((tab) => (
-        <Tabs.Screen
-          key={tab.name}
-          name={tab.name}
-          options={{
-            title: tab.title,
-            tabBarIcon: ({ focused }) => (
-              <TabIcon focused={focused} icon={tab.icon} />
-            ),
-          }}
-        />
-      ))}
+      {tabs.map((tab) => {
+        if (tab.name.includes("[id]")) {
+          return (
+            <Tabs.Screen
+              key={tab.name}
+              name={tab.name}
+              options={{
+                title: tab.title,
+                href: null,
+                tabBarIcon: ({ focused }) => (
+                  <TabIcon focused={focused} icon={tab.icon} />
+                ),
+              }}
+            />
+          );
+        }
+
+        return (
+          <Tabs.Screen
+            key={tab.name}
+            name={tab.name}
+            options={{
+              title: tab.title,
+              tabBarIcon: ({ focused }) => (
+                <TabIcon focused={focused} icon={tab.icon} />
+              ),
+            }}
+          />
+        );
+      })}
     </Tabs>
   );
 };
